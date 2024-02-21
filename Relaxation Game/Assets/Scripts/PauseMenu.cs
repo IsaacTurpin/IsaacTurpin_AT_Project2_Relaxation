@@ -24,7 +24,10 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        touchController.enabled = true;
+        if(touchController != null)
+        {
+            touchController.enabled = true;
+        }
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -32,7 +35,10 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        touchController.enabled = false;
+        if(touchController != null)
+        {
+            touchController.enabled = false;
+        }
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
@@ -40,5 +46,10 @@ public class PauseMenu : MonoBehaviour
     public void OpenHubScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

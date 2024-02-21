@@ -17,6 +17,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         currentScene = SceneManager.GetActiveScene();
         if(currentScene.buildIndex != 0)
         {

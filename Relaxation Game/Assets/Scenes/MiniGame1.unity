@@ -2130,7 +2130,9 @@ MonoBehaviour:
   objectPrefabs:
   - {fileID: 3757693467529197243, guid: ca68bb6405e0f8b459a5ffc6bf97e032, type: 3}
   - {fileID: 8888511739392629253, guid: 5fb8cdf29cae21d4c80c5a8975e54506, type: 3}
-  secondsBetweenObjects: 0.5
+  - {fileID: 2868235402420413071, guid: 1ee5de518a3fa7b4282b672c9ec333f9, type: 3}
+  - {fileID: 2937808080819647378, guid: 9368d4933d8b40842b403f46db766eb0, type: 3}
+  secondsBetweenObjects: 0.3
   forceRange: {x: 4, y: 6}
 --- !u!4 &2103500438
 Transform:

@@ -16,14 +16,22 @@ public class SceneController : MonoBehaviour
     [SerializeField] float distance;
     [SerializeField] float rangeLimit;
 
+    [SerializeField] CinemachineVirtualCamera mainVCam;
     [SerializeField] CinemachineVirtualCamera vcam;
     [SerializeField] CinemachineVirtualCamera vcam2;
+    [SerializeField] CinemachineVirtualCamera vcam3;
+
+
+    //minigame2 transition
+    [SerializeField] GameObject steeringCanvas;
+    [SerializeField] GameObject speedCanvas;
+    [SerializeField] GameObject miniGame2Canvas;
+    [SerializeField] GameObject boxBreathing;
 
     [SerializeField] GameObject starfield;
 
     void Start()
     {
-        Time.timeScale = 1;
         currentScene = SceneManager.GetActiveScene();
         if(currentScene.buildIndex != 0)
         {
@@ -46,19 +54,20 @@ public class SceneController : MonoBehaviour
                 case 0:
                     return;
                 case 1:
-                    SwitchCam();
+                    SwitchCamMiniGame1();
                     break;
                 case 2:
-                    //minigame2 stuff
+                    SwitchCamMiniGame2();
                     break;
                 case 3:
                     //mingame3 stuff
+                    SceneManager.LoadScene(sceneIndex);
                     break;
             }
         }
     }
 
-    private void SwitchCam()
+    private void SwitchCamMiniGame1()
     {
         Player.GetComponent<Cloud>().enabled = false;
         CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
@@ -79,6 +88,44 @@ public class SceneController : MonoBehaviour
     private void LoadMiniGame1()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void SwitchCamMiniGame2()
+    {
+        Player.GetComponent<Cloud>().enabled = false;
+        steeringCanvas.SetActive(false);
+        speedCanvas.SetActive(false);
+        CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.Priority = 10;
+        vcam3.Priority = 11;
+        boxBreathing.SetActive(true);
+        Invoke("MiniGame2", 2f);
+
+    }
+
+    private void MiniGame2()
+    {
+        miniGame2Canvas.SetActive(true);
+    }
+
+    public void SwitchToMainCam()
+    {
+        if(miniGame2Canvas)
+        {
+            miniGame2Canvas.SetActive(false);
+        }
+        if(boxBreathing)
+        {
+            boxBreathing.GetComponentInChildren<Oscillator>().begin = false;
+            boxBreathing.SetActive(false);
+        }
+        CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.Priority = 10;
+        mainVCam.Priority = 11;
+        Player.GetComponent<Cloud>().enabled = true;
+        steeringCanvas.SetActive(true);
+        speedCanvas.SetActive(true);
+        Time.timeScale = 1f;
     }
 
     public void OpenHubScene()

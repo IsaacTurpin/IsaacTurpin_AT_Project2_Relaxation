@@ -19,6 +19,8 @@ public class SceneController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera vcam;
     [SerializeField] CinemachineVirtualCamera vcam2;
 
+    [SerializeField] GameObject starfield;
+
     void Start()
     {
         Time.timeScale = 1;
@@ -67,6 +69,7 @@ public class SceneController : MonoBehaviour
 
     private void BlastOff()
     {
+        starfield.SetActive(true);
         CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
         cinemachineBrain.ActiveVirtualCamera.Priority = 10;
         vcam2.Priority = 11;

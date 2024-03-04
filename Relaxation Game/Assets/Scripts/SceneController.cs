@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Cinemachine;
 
 public class SceneController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject TransitionSpot3;
     [SerializeField] float distance;
     [SerializeField] float rangeLimit;
+
+    [SerializeField] CinemachineVirtualCamera vcam;
+    [SerializeField] CinemachineVirtualCamera vcam2;
 
     void Start()
     {
@@ -34,8 +38,44 @@ public class SceneController : MonoBehaviour
     {
         if(InRange(sceneIndex))
         {
-            SceneManager.LoadScene(sceneIndex);
+            //switch case here, case1: SwitchCam() (minigame1) etc...
+            switch (sceneIndex)
+            {
+                case 0:
+                    return;
+                case 1:
+                    SwitchCam();
+                    break;
+                case 2:
+                    //minigame2 stuff
+                    break;
+                case 3:
+                    //mingame3 stuff
+                    break;
+            }
         }
+    }
+
+    private void SwitchCam()
+    {
+        Player.GetComponent<Cloud>().enabled = false;
+        CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.Priority = 10;
+        vcam.Priority = 11;
+        Invoke("BlastOff", 1.5f);
+    }
+
+    private void BlastOff()
+    {
+        CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.Priority = 10;
+        vcam2.Priority = 11;
+        Invoke("LoadMiniGame1", 2.5f);
+    }
+
+    private void LoadMiniGame1()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public void OpenHubScene()
@@ -59,7 +99,6 @@ public class SceneController : MonoBehaviour
             case 3:
                 transitionSpot = TransitionSpot3.transform.position;
                 break;
-
         }
         distance = Vector3.Distance(Player.transform.position, transitionSpot);
 

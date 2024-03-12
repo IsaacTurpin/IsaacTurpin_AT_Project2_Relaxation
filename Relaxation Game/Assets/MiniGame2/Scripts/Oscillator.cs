@@ -15,6 +15,12 @@ public class Oscillator : MonoBehaviour
     private bool goUp;
     private bool goDown;
 
+    //World space text
+    [SerializeField] GameObject breatheInText;
+    [SerializeField] GameObject hold1Text;
+    [SerializeField] GameObject breatheOutText;
+    [SerializeField] GameObject hold2Text;
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +56,10 @@ public class Oscillator : MonoBehaviour
         if (goLeft)
         {
             transform.Translate(Vector3.left * period * Time.deltaTime);
+            breatheInText.SetActive(true);
+            hold1Text.SetActive(false);
+            breatheOutText.SetActive(false);
+            hold2Text.SetActive(false);
 
             if (transform.localPosition.x <= movementVector.x)
             {
@@ -61,6 +71,10 @@ public class Oscillator : MonoBehaviour
         if (goDown)
         {
             transform.Translate(Vector3.down * period * Time.deltaTime);
+            breatheInText.SetActive(false);
+            hold1Text.SetActive(true);
+            breatheOutText.SetActive(false);
+            hold2Text.SetActive(false);
 
             if (transform.localPosition.y <= movementVector.y)
             {
@@ -72,6 +86,10 @@ public class Oscillator : MonoBehaviour
         if (goRight)
         {
             transform.Translate(Vector3.right * period * Time.deltaTime);
+            breatheInText.SetActive(false);
+            hold1Text.SetActive(false);
+            breatheOutText.SetActive(true);
+            hold2Text.SetActive(false);
 
             if (transform.localPosition.x >= startingPosition.x + 0.204)
             {
@@ -83,6 +101,10 @@ public class Oscillator : MonoBehaviour
         if (goUp)
         {
             transform.Translate(Vector3.up * period * Time.deltaTime);
+            breatheInText.SetActive(false);
+            hold1Text.SetActive(false);
+            breatheOutText.SetActive(false);
+            hold2Text.SetActive(true);
 
             if (transform.localPosition.y >= startingPosition.y)
             {

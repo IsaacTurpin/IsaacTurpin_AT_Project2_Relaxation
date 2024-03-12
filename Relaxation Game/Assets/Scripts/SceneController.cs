@@ -28,6 +28,9 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject miniGame2Canvas;
     [SerializeField] GameObject boxBreathing;
 
+    //Minigame2 menu to info and back to menu
+    [SerializeField] GameObject boxBreathingInfo;
+
     [SerializeField] GameObject starfield;
 
     void Start()
@@ -106,6 +109,17 @@ public class SceneController : MonoBehaviour
     private void MiniGame2()
     {
         miniGame2Canvas.SetActive(true);
+    }
+
+    public void OpenInfoMG2()
+    {
+        miniGame2Canvas.SetActive(false);
+        boxBreathingInfo.SetActive(true);
+    }
+    public void CloseInfoMG2()
+    {
+        miniGame2Canvas.SetActive(true);
+        boxBreathingInfo.SetActive(false);
     }
 
     public void SwitchToMainCam()

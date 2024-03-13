@@ -41,6 +41,10 @@ public class Oscillator : MonoBehaviour
             goRight = false;
             goDown = false;
             goUp = false;
+            breatheInText.SetActive(false);
+            hold1Text.SetActive(false);
+            breatheOutText.SetActive(false);
+            hold2Text.SetActive(false);
             transform.localPosition = startingPosition;
         }
         

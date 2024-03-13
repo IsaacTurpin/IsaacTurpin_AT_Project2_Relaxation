@@ -21,6 +21,10 @@ public class SceneController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera vcam2;
     [SerializeField] CinemachineVirtualCamera vcam3;
 
+    //Start+info
+    [SerializeField] GameObject startMenu;
+    [SerializeField] GameObject infoStartMenu;
+
 
     //minigame2 transition
     [SerializeField] GameObject steeringCanvas;
@@ -57,14 +61,12 @@ public class SceneController : MonoBehaviour
                 case 0:
                     return;
                 case 1:
+                    return;
+                case 2:
                     SwitchCamMiniGame1();
                     break;
-                case 2:
-                    SwitchCamMiniGame2();
-                    break;
                 case 3:
-                    //mingame3 stuff
-                    SceneManager.LoadScene(sceneIndex);
+                    SwitchCamMiniGame2();
                     break;
             }
         }
@@ -90,7 +92,7 @@ public class SceneController : MonoBehaviour
 
     private void LoadMiniGame1()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     private void SwitchCamMiniGame2()
@@ -122,6 +124,16 @@ public class SceneController : MonoBehaviour
         boxBreathingInfo.SetActive(false);
     }
 
+    public void OpenInfoStart()
+    {
+        startMenu.SetActive(false);
+        infoStartMenu.SetActive(true);
+    }
+    public void CloseInfoStart()
+    {
+        startMenu.SetActive(true);
+        infoStartMenu.SetActive(false);
+    }
     public void SwitchToMainCam()
     {
         if(miniGame2Canvas)
@@ -144,7 +156,7 @@ public class SceneController : MonoBehaviour
 
     public void OpenHubScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public bool InRange(int sceneIndex)
@@ -155,13 +167,13 @@ public class SceneController : MonoBehaviour
             case 0:
                 return false;
             case 1:
+                return false;
+            case 2:
                 transitionSpot = TransitionSpot1.transform.position;
                 break;
-            case 2:
-                transitionSpot = TransitionSpot2.transform.position;
-                break;
             case 3:
-                transitionSpot = TransitionSpot3.transform.position;
+                transitionSpot = TransitionSpot2.transform.position;
+                //transitionSpot = TransitionSpot3.transform.position; - add this if scene transition to mg3 to case 4.
                 break;
         }
         distance = Vector3.Distance(Player.transform.position, transitionSpot);

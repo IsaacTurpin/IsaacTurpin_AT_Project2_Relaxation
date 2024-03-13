@@ -12,7 +12,11 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pauseMenu.SetActive(false);
+        if(pauseMenu != null) 
+        {
+            pauseMenu.SetActive(false);
+        }
+        
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenHubScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void Quit()

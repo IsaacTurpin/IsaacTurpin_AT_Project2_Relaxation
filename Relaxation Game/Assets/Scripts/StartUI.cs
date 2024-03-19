@@ -22,6 +22,11 @@ public class StartUI : MonoBehaviour
         
     }
 
+    public bool GameIsPaused()
+    {
+        return gameIsPaused;
+    }
+
     public void Resume()
     {
         menu.SetActive(false);

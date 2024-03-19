@@ -17,6 +17,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] float rangeLimit;
 
     [SerializeField] CinemachineVirtualCamera mainVCam;
+    [SerializeField] CinemachineVirtualCamera startVCam;
     [SerializeField] CinemachineVirtualCamera vcam;
     [SerializeField] CinemachineVirtualCamera vcam2;
     [SerializeField] CinemachineVirtualCamera vcam3;
@@ -24,6 +25,8 @@ public class SceneController : MonoBehaviour
     //Start+info
     [SerializeField] GameObject startMenu;
     [SerializeField] GameObject infoStartMenu;
+    [SerializeField] StartUI startUI;
+    private static bool canInherit = true;
 
 
     //minigame2 transition
@@ -39,16 +42,28 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
-        currentScene = SceneManager.GetActiveScene();
-        if(currentScene.buildIndex != 0)
-        {
-            //some sort of checkpoint, spawn back where you were in the hub. if scene is x spawn at x, pass into Cloud script Start function.
-        }
+        startVCam.Priority = 11;
+        canInherit = true;
+    }
+
+    private void InheritCloud()
+    {
+        CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.Priority = 10;
+        mainVCam.Priority = 11;
     }
 
     private void Update()
     {
-        
+        if(startUI != null) 
+        {
+            if(!startUI.GameIsPaused() && canInherit)
+            {
+                canInherit = false;
+                Invoke("InheritCloud", 1f);
+
+            }
+        }
     }
 
     public void SceneSelector(int sceneIndex)

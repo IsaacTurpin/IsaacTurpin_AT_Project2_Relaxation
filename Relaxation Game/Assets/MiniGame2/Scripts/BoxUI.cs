@@ -18,7 +18,11 @@ public class BoxUI : MonoBehaviour
         {
             pauseButton.SetActive(true);
         }
-        movingCube.GetComponent<Oscillator>().begin = true;
+        if (movingCube != null) 
+        {
+            movingCube.GetComponent<Oscillator>().begin = true;
+        }
+        
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
@@ -30,7 +34,11 @@ public class BoxUI : MonoBehaviour
         {
             pauseButton.SetActive(false);
         }
-        movingCube.GetComponent<Oscillator>().begin = false;
+        if(movingCube != null)
+        {
+            movingCube.GetComponent<Oscillator>().begin = false;
+        }
+        
         Time.timeScale = 0f;
         gameIsPaused = true;
     }

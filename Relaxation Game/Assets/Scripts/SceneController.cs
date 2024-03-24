@@ -21,6 +21,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera vcam;
     [SerializeField] CinemachineVirtualCamera vcam2;
     [SerializeField] CinemachineVirtualCamera vcam3;
+    [SerializeField] CinemachineVirtualCamera vcam4;
 
     //Start+info
     [SerializeField] GameObject startMenu;
@@ -39,6 +40,10 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject boxBreathingInfo;
 
     [SerializeField] GameObject starfield;
+
+    //minigame3 transition
+    [SerializeField] GameObject miniGame3Canvas;
+    [SerializeField] GameObject soundBoardInfo;
 
     void Start()
     {
@@ -76,7 +81,8 @@ public class SceneController : MonoBehaviour
                 case 0:
                     return;
                 case 1:
-                    return;
+                    SwitchCamMiniGame3();
+                    break;
                 case 2:
                     SwitchCamMiniGame1();
                     break;
@@ -123,6 +129,17 @@ public class SceneController : MonoBehaviour
 
     }
 
+    private void SwitchCamMiniGame3()
+    {
+        Player.GetComponent<Cloud>().enabled = false;
+        steeringCanvas.SetActive(false);
+        speedCanvas.SetActive(false);
+        CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
+        cinemachineBrain.ActiveVirtualCamera.Priority = 10;
+        vcam4.Priority = 11;
+        Invoke("MiniGame3", 2f);
+    }
+
     private void MiniGame2()
     {
         miniGame2Canvas.SetActive(true);
@@ -137,6 +154,22 @@ public class SceneController : MonoBehaviour
     {
         miniGame2Canvas.SetActive(true);
         boxBreathingInfo.SetActive(false);
+    }
+
+    private void MiniGame3()
+    {
+        miniGame3Canvas.SetActive(true);
+    }
+
+    public void OpenInfoMG3()
+    {
+        miniGame3Canvas.SetActive(false);
+        soundBoardInfo.SetActive(true);
+    }
+    public void CloseInfoMG3()
+    {
+        miniGame3Canvas.SetActive(true);
+        soundBoardInfo.SetActive(false);
     }
 
     public void OpenInfoStart()
@@ -160,6 +193,10 @@ public class SceneController : MonoBehaviour
             boxBreathing.GetComponentInChildren<Oscillator>().begin = false;
             boxBreathing.SetActive(false);
         }
+        if (miniGame3Canvas)
+        {
+            miniGame3Canvas.SetActive(false);
+        }
         CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
         cinemachineBrain.ActiveVirtualCamera.Priority = 10;
         mainVCam.Priority = 11;
@@ -182,7 +219,8 @@ public class SceneController : MonoBehaviour
             case 0:
                 return false;
             case 1:
-                return false;
+                transitionSpot = TransitionSpot3.transform.position;
+                break;
             case 2:
                 transitionSpot = TransitionSpot1.transform.position;
                 break;

@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] TouchController touchController;
+    [SerializeField] GameObject backgroundMusic;
     public static bool GameIsPaused = false;
 
     // Start is called before the first frame update
@@ -16,7 +17,11 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenu.SetActive(false);
         }
-        
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
@@ -32,6 +37,10 @@ public class PauseMenu : MonoBehaviour
         {
             touchController.enabled = true;
         }
+        if(backgroundMusic != null) 
+        {
+            backgroundMusic.SetActive(true);
+        }
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -42,6 +51,10 @@ public class PauseMenu : MonoBehaviour
         if(touchController != null)
         {
             touchController.enabled = false;
+        }
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.SetActive(false);
         }
         Time.timeScale = 0f;
         GameIsPaused = true;

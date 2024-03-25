@@ -10,6 +10,7 @@ public class StartUI : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject slider;
     [SerializeField] GameObject pauseButton;
+    [SerializeField] GameObject backgroundMusic;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,10 @@ public class StartUI : MonoBehaviour
         {
             pauseButton.SetActive(true);
         }
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.SetActive(true);
+        }
         Time.timeScale = 1f;
         gameIsPaused = false;
     }
@@ -60,6 +65,10 @@ public class StartUI : MonoBehaviour
         if (pauseButton != null)
         {
             pauseButton.SetActive(false);
+        }
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.SetActive(false);
         }
         Time.timeScale = 0f;
         gameIsPaused = true;

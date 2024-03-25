@@ -15,6 +15,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject TransitionSpot3;
     [SerializeField] float distance;
     [SerializeField] float rangeLimit;
+    [SerializeField] GameObject backgroundMusic;
 
     [SerializeField] CinemachineVirtualCamera mainVCam;
     [SerializeField] CinemachineVirtualCamera startVCam;
@@ -104,6 +105,10 @@ public class SceneController : MonoBehaviour
 
     private void BlastOff()
     {
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.SetActive(false);
+        }
         starfield.SetActive(true);
         CinemachineBrain cinemachineBrain = FindAnyObjectByType<CinemachineBrain>();
         cinemachineBrain.ActiveVirtualCamera.Priority = 10;

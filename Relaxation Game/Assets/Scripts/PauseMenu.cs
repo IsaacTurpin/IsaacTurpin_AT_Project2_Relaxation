@@ -62,6 +62,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenHubScene()
     {
+        Debug.Log("pppp");
         SceneManager.LoadScene(1);
     }
 

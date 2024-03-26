@@ -14,6 +14,8 @@ public class Oscillator : MonoBehaviour
     private bool goUp;
     private bool goDown;
 
+    [SerializeField] AudioSource audioSource;
+
     //World space text
     [SerializeField] GameObject breatheInText;
     [SerializeField] GameObject hold1Text;
@@ -25,6 +27,7 @@ public class Oscillator : MonoBehaviour
     void Start()
     {
         startingPosition = transform.localPosition;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +69,7 @@ public class Oscillator : MonoBehaviour
 
             if (transform.localPosition.x <= movementVector.x)
             {
+                audioSource.Play();
                 goLeft = false;
                 goDown = true;
             }
@@ -81,6 +85,7 @@ public class Oscillator : MonoBehaviour
 
             if (transform.localPosition.y <= movementVector.y)
             {
+                audioSource.Play();
                 goDown = false;
                 goRight = true;
             }
@@ -96,6 +101,7 @@ public class Oscillator : MonoBehaviour
 
             if (transform.localPosition.x >= startingPosition.x + 0.204)
             {
+                audioSource.Play();
                 goRight = false;
                 goUp = true;
             }
@@ -111,6 +117,7 @@ public class Oscillator : MonoBehaviour
 
             if (transform.localPosition.y >= startingPosition.y)
             {
+                audioSource.Play();
                 goUp = false;
                 goLeft = true;
             }

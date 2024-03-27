@@ -76,7 +76,6 @@ public class SceneController : MonoBehaviour
     {
         if(InRange(sceneIndex))
         {
-            //switch case here, case1: SwitchCam() (minigame1) etc...
             switch (sceneIndex)
             {
                 case 0:
@@ -231,7 +230,6 @@ public class SceneController : MonoBehaviour
                 break;
             case 3:
                 transitionSpot = TransitionSpot2.transform.position;
-                //transitionSpot = TransitionSpot3.transform.position; - add this if scene transition to mg3 to case 4.
                 break;
         }
         distance = Vector3.Distance(Player.transform.position, transitionSpot);

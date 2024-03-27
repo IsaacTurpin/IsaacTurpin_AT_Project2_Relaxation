@@ -22,13 +22,11 @@ public class Object : MonoBehaviour
         {
             case ObjectType.Good:
                 scoreController.IncreaseScore(scoreChange);
-                Debug.Log("Score Increase");
                 Destroy(gameObject);
                 break;
 
             case ObjectType.Bad:
                 scoreController.DecreaseScore(scoreChange);
-                Debug.Log("Score Decrease");
                 Destroy(gameObject);
                 break;
         }

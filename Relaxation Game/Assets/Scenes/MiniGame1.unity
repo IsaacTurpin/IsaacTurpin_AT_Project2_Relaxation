@@ -2973,8 +2973,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Space Tap!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 555643fa702d79b41b27a6eacf800381, type: 2}
-  m_sharedMaterial: {fileID: 7379656398015337608, guid: 555643fa702d79b41b27a6eacf800381,
+  m_fontAsset: {fileID: 11400000, guid: 9d2f505a595afb04f86ba5d1893d1262, type: 2}
+  m_sharedMaterial: {fileID: 7379656398015337608, guid: 9d2f505a595afb04f86ba5d1893d1262,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
